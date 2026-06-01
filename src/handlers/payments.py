@@ -50,8 +50,6 @@ _DEFAULT_PAYMENT_METHODS = [
     {"key": "PAYPAL", "label": "💳 PayPal", "enabled": True},
 ]
 
-_PAYMENT_IMAGE_CACHE: dict[int, dict[str, float]] = {}
-
 
 def _fmt_usd(value: Any) -> str:
     try:
@@ -67,8 +65,7 @@ def _extract_args(text: str | None) -> list[str]:
     raw = (text or "").strip()
     if not raw:
         return []
-    parts = raw.split()
-    return parts[1:]
+    return raw.split()[1:]
 
 
 def _method_key(value: Any) -> str:
@@ -81,6 +78,30 @@ def _build_home_keyboard() -> InlineKeyboardMarkup:
             [InlineKeyboardButton(text="💼 Wallet", callback_data="payments:wallet")],
         ]
     )
+
+
+async def _send_start_text(message: Message) -> None:
+    await message.answer(
+        "💳 <b>Payment Module activo</b>\n\n"
+        "Comandos:\n"
+        "• /pay_product PRODUCT_ID [qty]\n"
+        "• /checkout_cart\n"
+        "• /status ORDER_ID\n"
+        "• /wallet",
+        parse_mode=ParseMode.HTML,
+        reply_markup=_build_home_keyboard(),
+    )
+
+
+async def _send_wallet_text(message: Message, telegram_id: int) -> None:
+    try:
+        data = await api_client.get_wallet(telegram_id)
+    except Exception:
+        await message.answer("❌ No pude consultar tu wallet.")
+        return
+    wallet = data.get("wallet") or data
+    balance = wallet.get("balance") or wallet.get("balance_usd") or 0
+    await message.answer(f"💼 Saldo disponible: <b>{_fmt_usd(balance)}</b>", parse_mode=ParseMode.HTML)
 
 
 async def _get_payment_methods() -> List[Dict[str, Any]]:
@@ -99,16 +120,10 @@ def _build_payment_methods_keyboard(order_id: str, methods: list[dict[str, Any]]
     enabled_methods = [item for item in methods if bool(item.get("enabled", True))]
     for index, method in enumerate(enabled_methods, start=1):
         label = str(method.get("label") or method.get("key") or f"Metodo {index}")
-        rows.append([
-            InlineKeyboardButton(text=label, callback_data=f"paymethod:{order_id}:{index}")
-        ])
+        rows.append([InlineKeyboardButton(text=label, callback_data=f"paymethod:{order_id}:{index}")])
     if wallet_enabled:
-        rows.append([
-            InlineKeyboardButton(text="💰 Pagar con saldo", callback_data=f"walletpay:{order_id}")
-        ])
-    rows.append([
-        InlineKeyboardButton(text="📦 Estado", callback_data=f"status:{order_id}"),
-    ])
+        rows.append([InlineKeyboardButton(text="💰 Pagar con saldo", callback_data=f"walletpay:{order_id}")])
+    rows.append([InlineKeyboardButton(text="📦 Estado", callback_data=f"status:{order_id}")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
@@ -163,10 +178,7 @@ def _build_payment_instructions(order_id: str, method_key: str, total: Any, meth
     description = str((method or {}).get("description") or "").strip()
     if description:
         lines.extend(["", html.escape(description)])
-    lines.extend([
-        "",
-        "Cuando termines el pago, presiona <b>Ya pague</b> y envia una captura del comprobante.",
-    ])
+    lines.extend(["", "Cuando termines el pago, presiona <b>Ya pague</b> y envia una captura del comprobante."])
     return "\n".join(lines)
 
 
@@ -189,9 +201,7 @@ async def _render_order_payment_options(message: Message, state: FSMContext, ord
         payment_method_order_id=None,
         payment_ready=False,
     )
-    wallet_text = ""
-    if wallet_balance is not None:
-        wallet_text = f"\n💼 Saldo disponible: <b>{_fmt_usd(wallet_balance)}</b>"
+    wallet_text = f"\n💼 Saldo disponible: <b>{_fmt_usd(wallet_balance)}</b>" if wallet_balance is not None else ""
     await message.answer(
         f"🧾 <b>Orden creada</b>\n\nID: <code>{html.escape(order_id)}</code>\nTotal: <b>{_fmt_usd(total)}</b>{wallet_text}\n\nSelecciona un metodo de pago:",
         reply_markup=_build_payment_methods_keyboard(order_id, methods, wallet_enabled=True),
@@ -202,21 +212,13 @@ async def _render_order_payment_options(message: Message, state: FSMContext, ord
 
 @router.message(Command("start"))
 async def cmd_start(message: Message) -> None:
-    await message.answer(
-        "💳 <b>Payment Module activo</b>\n\n"
-        "Comandos:\n"
-        "• /pay_product PRODUCT_ID [qty]\n"
-        "• /status ORDER_ID\n"
-        "• /wallet",
-        parse_mode=ParseMode.HTML,
-        reply_markup=_build_home_keyboard(),
-    )
+    await _send_start_text(message)
 
 
 @router.callback_query(F.data == "payments:home")
 async def cb_home(callback: CallbackQuery) -> None:
     if callback.message:
-        await cmd_start(callback.message)
+        await _send_start_text(callback.message)
     await callback.answer()
 
 
@@ -233,16 +235,13 @@ async def cmd_pay_product(message: Message, state: FSMContext) -> None:
         await message.answer("Uso: /pay_product PRODUCT_ID [qty]")
         return
     product_id = args[0]
-    qty = 1
-    if len(args) > 1 and args[1].isdigit():
-        qty = max(int(args[1]), 1)
-    payload = {
+    qty = max(int(args[1]), 1) if len(args) > 1 and args[1].isdigit() else 1
+    result = await api_client.create_order({
         "telegram_id": message.from_user.id,
         "username": message.from_user.username,
         "product_id": product_id,
         "qty": qty,
-    }
-    result = await api_client.create_order(payload)
+    })
     if result.get("status_code"):
         data = result.get("data") or {}
         await message.answer(f"❌ No se pudo crear la orden.\nCodigo: <code>{html.escape(str(data.get('error') or result.get('status_code')))}</code>", parse_mode=ParseMode.HTML)
@@ -252,21 +251,14 @@ async def cmd_pay_product(message: Message, state: FSMContext) -> None:
     if not order_id:
         await message.answer("❌ La API no devolvio order_id.")
         return
-    await _render_order_payment_options(
-        message,
-        state,
-        order_id,
-        order.get("total") or result.get("total_usd"),
-        result.get("wallet_balance"),
-    )
+    await _render_order_payment_options(message, state, order_id, order.get("total") or result.get("total_usd"), result.get("wallet_balance"))
 
 
 @router.message(Command("checkout_cart"))
 async def cmd_checkout_cart(message: Message, state: FSMContext) -> None:
     if not message.from_user:
         return
-    payload = {"telegram_id": message.from_user.id, "username": message.from_user.username}
-    result = await api_client.checkout_cart(payload)
+    result = await api_client.checkout_cart({"telegram_id": message.from_user.id, "username": message.from_user.username})
     if result.get("ok") is False:
         await message.answer(f"❌ No se pudo crear la orden del carrito: {html.escape(str(result.get('error') or 'ERROR'))}", parse_mode=ParseMode.HTML)
         return
@@ -274,13 +266,7 @@ async def cmd_checkout_cart(message: Message, state: FSMContext) -> None:
     if not order_id:
         await message.answer("❌ La API no devolvio order_id.")
         return
-    await _render_order_payment_options(
-        message,
-        state,
-        order_id,
-        result.get("total_usd"),
-        result.get("wallet_balance"),
-    )
+    await _render_order_payment_options(message, state, order_id, result.get("total_usd"), result.get("wallet_balance"))
 
 
 @router.callback_query(F.data.startswith("paymethod:"))
@@ -300,17 +286,8 @@ async def cb_payment_method(callback: CallbackQuery, state: FSMContext) -> None:
     method = methods[selector - 1]
     method_key = str(method.get("key") or "").strip()
     data = await state.get_data()
-    total = data.get("current_order_total")
-    await state.update_data(
-        payment_method=method_key,
-        payment_method_order_id=order_id,
-        payment_ready=False,
-    )
-    await callback.message.answer(
-        _build_payment_instructions(order_id, method_key, total, method),
-        reply_markup=_build_paid_keyboard(order_id),
-        parse_mode=ParseMode.HTML,
-    )
+    await state.update_data(payment_method=method_key, payment_method_order_id=order_id, payment_ready=False)
+    await callback.message.answer(_build_payment_instructions(order_id, method_key, data.get("current_order_total"), method), reply_markup=_build_paid_keyboard(order_id), parse_mode=ParseMode.HTML)
     await callback.answer()
 
 
@@ -365,10 +342,9 @@ async def cb_paid(callback: CallbackQuery, state: FSMContext) -> None:
 
 @router.message(PaymentStates.waiting_photo, F.photo)
 async def handle_payment_photo(message: Message, state: FSMContext) -> None:
-    if not message.photo:
-        return
-    photo = message.photo[-1]
-    await _process_payment_proof(message, state, photo.file_id, photo.file_unique_id)
+    if message.photo:
+        photo = message.photo[-1]
+        await _process_payment_proof(message, state, photo.file_id, photo.file_unique_id)
 
 
 @router.message(PaymentStates.waiting_photo, F.document)
@@ -403,15 +379,14 @@ async def _process_payment_proof(message: Message, state: FSMContext, file_id: s
     if not payment_method or data.get("payment_method_order_id") != order_id:
         await message.answer("Primero selecciona el metodo de pago usado.")
         return
-    payload = {
-        "telegram_id": message.from_user.id,
-        "screenshot_file_id": file_id,
-        "screenshot_unique_id": unique_id,
-        "payment_method": payment_method,
-    }
     notice = await message.answer("🔎 Analizando comprobante...")
     try:
-        result = await api_client.submit_payment_proof(str(order_id), payload)
+        result = await api_client.submit_payment_proof(str(order_id), {
+            "telegram_id": message.from_user.id,
+            "screenshot_file_id": file_id,
+            "screenshot_unique_id": unique_id,
+            "payment_method": payment_method,
+        })
     except (httpx.TimeoutException, httpx.RequestError):
         await notice.delete()
         await message.answer("❌ Error de red enviando comprobante. Intentalo otra vez.")
@@ -422,13 +397,10 @@ async def _process_payment_proof(message: Message, state: FSMContext, file_id: s
         return
     await notice.delete()
     if result.get("status_code"):
-        data = result.get("data") or {}
-        error = str(data.get("error") or result.get("status_code"))
-        msg = str(data.get("message") or "")
-        await message.answer(
-            f"⚠️ Comprobante no aceptado.\nCodigo: <code>{html.escape(error)}</code>" + (f"\n{html.escape(msg)}" if msg else ""),
-            parse_mode=ParseMode.HTML,
-        )
+        payload = result.get("data") or {}
+        error = str(payload.get("error") or result.get("status_code"))
+        msg = str(payload.get("message") or "")
+        await message.answer(f"⚠️ Comprobante no aceptado.\nCodigo: <code>{html.escape(error)}</code>" + (f"\n{html.escape(msg)}" if msg else ""), parse_mode=ParseMode.HTML)
         return
     await message.answer("✅ Comprobante recibido. Tu pago queda en revision.")
     await state.update_data(order_id=None, payment_ready=False, payment_method=None, payment_method_order_id=None)
@@ -476,18 +448,11 @@ async def _send_order_status(message: Message, order_id: str) -> None:
 async def cmd_wallet(message: Message) -> None:
     if not message.from_user:
         return
-    try:
-        data = await api_client.get_wallet(message.from_user.id)
-    except Exception:
-        await message.answer("❌ No pude consultar tu wallet.")
-        return
-    wallet = data.get("wallet") or data
-    balance = wallet.get("balance") or wallet.get("balance_usd") or 0
-    await message.answer(f"💼 Saldo disponible: <b>{_fmt_usd(balance)}</b>", parse_mode=ParseMode.HTML)
+    await _send_wallet_text(message, message.from_user.id)
 
 
 @router.callback_query(F.data == "payments:wallet")
 async def cb_wallet(callback: CallbackQuery) -> None:
-    if callback.message:
-        await cmd_wallet(callback.message)
+    if callback.message and callback.from_user:
+        await _send_wallet_text(callback.message, callback.from_user.id)
     await callback.answer()
