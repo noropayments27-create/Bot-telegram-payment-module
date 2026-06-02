@@ -1,0 +1,38 @@
+{
+  "name": "telegram-sales-api",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "migrate": "node scripts/run_sql_migrations.js",
+    "migrate:with-seed": "node scripts/run_sql_migrations.js --include-seeds",
+    "migrate:adjustments": "psql -d telegram_sales -f sql/014_affiliate_adjustments.sql",
+    "seed:catalog": "node seeds/seed_catalog.js",
+    "backup:db": "bash ./scripts/backup_db.sh",
+    "restore:db": "bash ./scripts/restore_db.sh",
+    "backup:drive": "node ./scripts/upload_backup_to_drive.js",
+    "backup:telegram": "node ./scripts/upload_backup_to_telegram.js",
+    "ops:healthcheck": "node ./scripts/ops_healthcheck.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "googleapis": "^173.0.0",
+    "helmet": "^7.1.0",
+    "js-yaml": "^4.1.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^8.0.7",
+    "pg": "^8.16.3",
+    "playwright": "^1.57.0",
+    "tesseract.js": "^7.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

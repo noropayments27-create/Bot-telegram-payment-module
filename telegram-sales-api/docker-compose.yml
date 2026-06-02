@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: telegram_sales_db
+    environment:
+      POSTGRES_USER: telegram
+      POSTGRES_PASSWORD: telegram
+      POSTGRES_DB: telegram_sales
+    ports:
+      - "5432:5432"
+    volumes:
+      - telegram_sales_pgdata:/var/lib/postgresql/data
+
+volumes:
+  telegram_sales_pgdata:

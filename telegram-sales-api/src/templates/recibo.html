@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo de Pago</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0b0b;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 24px;
+            color: #c8ffd2;
+        }
+        .receipt {
+            width: 340px;
+            background: radial-gradient(circle at top, #1a1a1a 0%, #0f0f0f 55%, #0a0a0a 100%);
+            padding: 22px 20px;
+            border: 2px solid #2aff67;
+            box-shadow: 0 0 16px rgba(42, 255, 103, 0.35), 0 0 40px rgba(0,0,0,0.6);
+            color: #c8ffd2;
+            line-height: 1.5;
+            font-size: 13px;
+            border-radius: 16px;
+        }
+        .header, .footer {
+            text-align: center;
+            text-transform: uppercase;
+            color: #7dff9a;
+            letter-spacing: 1px;
+        }
+        .header h2 {
+            margin: 0 0 8px 0;
+            padding: 8px 0;
+            border: 1px solid rgba(42, 255, 103, 0.5);
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(42, 255, 103, 0.25);
+        }
+        .divider {
+            border-top: 1px dashed rgba(42, 255, 103, 0.6);
+            margin: 10px 0;
+        }
+        .details, .items, .totals {
+            margin-bottom: 10px;
+        }
+        .details div, .totals div {
+            display: flex;
+            justify-content: space-between;
+        }
+        .items table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .items th, .items td {
+            text-align: left;
+            padding: 3px 0;
+        }
+        .items th:last-child {
+            text-align: right;
+        }
+        .items td:last-child, .totals div span:last-child {
+            text-align: right;
+            font-weight: bold;
+        }
+        .thank-you {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .barcode {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .barcode img {
+             width: 100%;
+             height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="receipt">
+    <div class="header">
+        <h2><strong>{{RECEIPT_TITLE}}</strong></h2>
+    </div>
+
+    <div class="details">
+        <div><span>{{ORDER_NUMBER_LABEL}}</span> <span>{{ORDER_NUMBER}}</span></div>
+        <div><span>{{TELEGRAM_ID_LABEL}}</span> <span>{{TELEGRAM_ID}}</span></div>
+        <div><span>{{USERNAME_LABEL}}</span> <span>{{USERNAME}}</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="details">
+        <div><span>{{DATE_LABEL}}</span> <span>{{DATE_TIME}}</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="items">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{DESCRIPTION_LABEL}}</th>
+                    <th>{{VALUE_LABEL}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ITEM_ROWS_HTML}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="font-size: 13px;">Telegram Bot: @{{BOT_USERNAME}}</div>
+
+    <div class="divider"></div>
+
+    <div class="totals">
+        <div><span>{{SUBTOTAL_LABEL}}</span> <span>{{SUBTOTAL}}</span></div>
+        <div><span>{{COMMISSION_LABEL}}</span> <span>{{COMMISSION}}</span></div>
+        <div><span><strong>{{TOTAL_LABEL}}</strong></span> <span><strong>{{TOTAL}}</strong></span></div>
+        {{LOCAL_TOTAL_LINE}}
+        <div><span>{{REFERRED_BY_LABEL}}</span> <span>{{REFERRED_BY}}</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="font-size: 13px;">Telegram: @{{ADMIN_TELEGRAM}}</div>
+
+    <div class="divider"></div>
+
+    <div class="footer">
+        <div class="thank-you">{{THANK_YOU}}</div>
+        <div class="barcode">
+            ||||||||||||||||||||||||||||||
+            <!-- Representación visual del código de barras (placeholder) -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

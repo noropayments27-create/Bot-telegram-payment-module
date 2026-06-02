@@ -1,26 +1,28 @@
-# Bot Telegram Payment Module
+# API de pagos
 
-Modulo independiente para procesar pagos manuales desde un bot de Telegram usando `aiogram` y un backend externo.
+Este repositorio ya no es solo un cliente de Telegram. Ahora contiene el backend central de pagos en `telegram-sales-api`, mas el bot Python que puede consumirlo si quieres mantener la capa de mensajeria separada.
 
-Este repo fue extraido conceptualmente del flujo de pagos del bot original, pero queda limpio y enfocado solo en:
+La idea operativa es esta:
 
-- Crear ordenes de pago.
-- Mostrar metodos de pago.
-- Pagar con saldo interno / wallet.
-- Recibir comprobantes de pago.
-- Consultar estado de orden.
-- Aprobar, rechazar, cancelar y reembolsar ordenes desde comandos admin.
-- Procesar recargas de wallet desde admin.
+- `telegram-sales-api` implementa el flujo real de pagos.
+- El bot Python en `src/` consume esa API como cliente opcional.
+- Tus otros proyectos solo llaman a esta API central y no vuelven a copiar la logica de ordenes, comprobantes, wallet ni admin.
 
-> Importante: este bot no cobra directamente con Stripe, MercadoPago Checkout ni PayPal API. Este modulo esta pensado para pagos manuales por comprobante y/o saldo interno, delegando la validacion real al backend definido en `API_BASE_URL`.
+## Estructura
+
+```text
+telegram-sales-api/   backend Node.js + PostgreSQL + admin routes
+src/                  bot Python cliente de la API
+```
 
 ## Requisitos
 
-- Python 3.10+
-- Bot de Telegram creado con BotFather
-- Backend compatible con los endpoints documentados abajo
+- Node.js 18+ para `telegram-sales-api`
+- Python 3.10+ para `src/`
+- PostgreSQL para el backend
+- Bot de Telegram creado con BotFather si vas a usar la capa bot
 
-## Instalacion
+## Instalacion del bot
 
 ```bash
 python -m venv .venv
@@ -40,7 +42,7 @@ copy .env.example .env
 python -m src.main
 ```
 
-## Variables de entorno
+## Variables de entorno del bot
 
 Configura `.env` usando `.env.example` como base.
 
@@ -64,6 +66,40 @@ Destinos de pago fallback:
 - `CRYPTO_WALLET_LTC`
 - `CRYPTO_WALLET_USDT_TRON`
 - `CRYPTO_WALLET_USDT_BSC`
+
+## Backend de pagos
+
+El backend real vive en `telegram-sales-api/`. Ese servicio implementa:
+
+- crear ordenes
+- listar metodos de pago
+- recibir comprobantes
+- pagar con wallet
+- consultar wallet e historial
+- aprobar, rechazar, cancelar y reembolsar ordenes
+- administrar recargas de wallet
+
+Para correrlo:
+
+```bash
+cd telegram-sales-api
+npm install
+cp .env.example .env
+npm run migrate
+npm run dev
+```
+
+Si quieres cargar productos demo del bot original:
+
+```bash
+npm run migrate:with-seed
+```
+
+La API queda localmente en:
+
+```text
+http://localhost:3001
+```
 
 ## Uso del bot
 
@@ -140,9 +176,9 @@ Rechazar recarga:
 /reject_topup TOPUP_REF motivo opcional
 ```
 
-## Endpoints esperados del backend
+## Endpoints del backend
 
-Este modulo espera que tu backend implemente endpoints similares a estos:
+Estos son algunos de los endpoints expuestos por el backend central:
 
 ```text
 GET    /health
@@ -163,6 +199,32 @@ POST   /admin/orders/{order_id}/refund
 GET    /admin/wallets/topups
 POST   /admin/wallets/topups/{ref}/approve
 POST   /admin/wallets/topups/{ref}/reject
+```
+
+## Integracion En Otros Proyectos
+
+Tus proyectos futuros no necesitan instalar todo el flujo de pagos. Les basta con:
+
+- apuntar a la URL de esta API central
+- autenticarse con `x-bot-secret`
+- crear ordenes o consultar estados desde HTTP
+
+En esos proyectos solo necesitas frontend propio si quieres mostrar pantallas de cobro o botones al usuario. La logica de pago no se duplica.
+
+Ejemplo de variables para otro proyecto:
+
+```env
+PAYMENTS_API_URL=https://api-de-pagos.tu-dominio.com
+PAYMENTS_API_SECRET=el-mismo-valor-de-BOT_TO_API_SECRET
+```
+
+Ejemplo de llamada:
+
+```bash
+curl -X POST "$PAYMENTS_API_URL/orders" \
+  -H "Content-Type: application/json" \
+  -H "x-bot-secret: $PAYMENTS_API_SECRET" \
+  -d '{"telegram_id":123456789,"username":"cliente","product_id":"PRODUCT_UUID","qty":1}'
 ```
 
 ## Estados esperados de orden

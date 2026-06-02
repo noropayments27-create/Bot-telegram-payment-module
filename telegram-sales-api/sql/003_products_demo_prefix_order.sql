@@ -1,0 +1,48 @@
+-- 003_products_demo_prefix_order.sql
+-- DEPRECATED: ahora se ordena por prefijo y se controla por seed UPSERT.
+
+UPDATE products SET name = 'SHOP 01 - 💳 Venta de Tarjetas' WHERE name = 'SHOP - 💳 Venta de Tarjetas';
+UPDATE products SET name = 'SHOP 02 - 🔗 Links de CCS Shop' WHERE name = 'SHOP - 🔗 Links de CCS Shop';
+UPDATE products SET name = 'SHOP 03 - 🕵️ Foros de Carding' WHERE name = 'SHOP - 🕵️ Foros de Carding';
+UPDATE products SET name = 'SHOP 04 - 📊 Paneles SMM' WHERE name = 'SHOP - 📊 Paneles SMM';
+UPDATE products SET name = 'SHOP 05 - 📲 Paneles SMS' WHERE name = 'SHOP - 📲 Paneles SMS';
+UPDATE products SET name = 'SHOP 06 - 🎁 Paneles Gift Card' WHERE name = 'SHOP - 🎁 Paneles Gift Card';
+UPDATE products SET name = 'SHOP 07 - 🎬 Paneles Streaming' WHERE name = 'SHOP - 🎬 Paneles Streaming';
+UPDATE products SET name = 'SHOP 08 - 🎮 Paneles de Juegos' WHERE name = 'SHOP - 🎮 Paneles de Juegos';
+UPDATE products SET name = 'SHOP 09 - 📧 Emails Temporales' WHERE name = 'SHOP - 📧 Emails Temporales';
+UPDATE products SET name = 'SHOP 10 - 🌐 Hosting y Dominios' WHERE name = 'SHOP - 🌐 Hosting y Dominios';
+UPDATE products SET name = 'SHOP 11 - 🧾 Logs y Bases de Datos' WHERE name = 'SHOP - 🧾 Logs y Bases de Datos';
+UPDATE products SET name = 'SHOP 12 - 🛡️ VPN Premium' WHERE name = 'SHOP - 🛡️ VPN Premium';
+UPDATE products SET name = 'SHOP 13 - 🧰 Herramientas Digitales' WHERE name = 'SHOP - 🧰 Herramientas Digitales';
+UPDATE products SET name = 'SHOP 14 - 📥 Descargas Premium' WHERE name = 'SHOP - 📥 Descargas Premium';
+UPDATE products SET name = 'SHOP 15 - 🤖 Bots Automatizados' WHERE name = 'SHOP - 🤖 Bots Automatizados';
+UPDATE products SET name = 'SHOP 16 - 💼 Servicios Freelance' WHERE name = 'SHOP - 💼 Servicios Freelance';
+UPDATE products SET name = 'SHOP 17 - 🧑‍💻 Cursos y Tutoriales' WHERE name = 'SHOP - 🧑‍💻 Cursos y Tutoriales';
+UPDATE products SET name = 'SHOP 18 - 🔐 Cuentas Verificadas' WHERE name = 'SHOP - 🔐 Cuentas Verificadas';
+UPDATE products SET name = 'METODOS 01 - ✅ Método Flux' WHERE name = 'METODOS - ✅ Método Flux';
+UPDATE products SET name = 'METODOS 02 - ✅ Método Atlas' WHERE name = 'METODOS - ✅ Método Atlas';
+UPDATE products SET name = 'METODOS 03 - ✅ Método Prisma' WHERE name = 'METODOS - ✅ Método Prisma';
+UPDATE products SET name = 'METODOS 04 - ✅ Método Vector' WHERE name = 'METODOS - ✅ Método Vector';
+UPDATE products SET name = 'METODOS 05 - ✅ Método Delta' WHERE name = 'METODOS - ✅ Método Delta';
+UPDATE products SET name = 'METODOS 06 - ✅ Método Pulse' WHERE name = 'METODOS - ✅ Método Pulse';
+UPDATE products SET name = 'METODOS 07 - ✅ Método Nova' WHERE name = 'METODOS - ✅ Método Nova';
+UPDATE products SET name = 'METODOS 08 - ✅ Método Sigma' WHERE name = 'METODOS - ✅ Método Sigma';
+UPDATE products SET name = 'METODOS 09 - ✅ Método Orion' WHERE name = 'METODOS - ✅ Método Orion';
+UPDATE products SET name = 'VIP 01 - 💬 VIP Aurora' WHERE name = 'VIP - 💬 VIP Aurora';
+UPDATE products SET name = 'VIP 02 - 💬 VIP Nexus' WHERE name = 'VIP - 💬 VIP Nexus';
+UPDATE products SET name = 'VIP 03 - 💬 VIP Zenith' WHERE name = 'VIP - 💬 VIP Zenith';
+UPDATE products SET name = 'VIP 04 - 💬 VIP Pulse' WHERE name = 'VIP - 💬 VIP Pulse';
+UPDATE products SET name = 'VIP 05 - 💬 VIP Prime' WHERE name = 'VIP - 💬 VIP Prime';
+UPDATE products SET name = 'VIP 06 - 💬 VIP Terra' WHERE name = 'VIP - 💬 VIP Terra';
+UPDATE products SET name = 'VIP 07 - 💬 VIP Sigma' WHERE name = 'VIP - 💬 VIP Sigma';
+UPDATE products SET name = 'VIP 08 - 💬 VIP Stellar' WHERE name = 'VIP - 💬 VIP Stellar';
+UPDATE products SET name = 'VIP 09 - 💬 VIP Omega' WHERE name = 'VIP - 💬 VIP Omega';
+UPDATE products SET name = 'WEB 01 - 💻 Pack Landing Pro' WHERE name = 'WEB - 💻 Pack Landing Pro';
+UPDATE products SET name = 'WEB 02 - 💻 Script Auto' WHERE name = 'WEB - 💻 Script Auto';
+UPDATE products SET name = 'WEB 03 - 💻 Toolkit SEO' WHERE name = 'WEB - 💻 Toolkit SEO';
+UPDATE products SET name = 'WEB 04 - 💻 Panel Web Lite' WHERE name = 'WEB - 💻 Panel Web Lite';
+UPDATE products SET name = 'WEB 05 - 💻 Web Starter' WHERE name = 'WEB - 💻 Web Starter';
+UPDATE products SET name = 'WEB 06 - 💻 Bot Web' WHERE name = 'WEB - 💻 Bot Web';
+UPDATE products SET name = 'WEB 07 - 💻 Pack UI' WHERE name = 'WEB - 💻 Pack UI';
+UPDATE products SET name = 'WEB 08 - 💻 Web Plus' WHERE name = 'WEB - 💻 Web Plus';
+UPDATE products SET name = 'WEB 09 - 💻 Web Master' WHERE name = 'WEB - 💻 Web Master';

@@ -82,7 +82,7 @@ def _build_home_keyboard() -> InlineKeyboardMarkup:
 
 async def _send_start_text(message: Message) -> None:
     await message.answer(
-        "💳 <b>Payment Module activo</b>\n\n"
+        "💳 <b>API de pagos activa</b>\n\n"
         "Comandos:\n"
         "• /pay_product PRODUCT_ID [qty]\n"
         "• /checkout_cart\n"

@@ -1,0 +1,477 @@
+products:
+  - category: SHOP
+    position: 1
+    sku_key: shop_producto_01
+    name: "SHOP 01 - 💳 Venta de Tarjetas"
+    price_usd: 25
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Escribe a @Noropayments para enviarte el contenido. | Se te enviara 1 CCS validada. | IMPORTANTE: Toma una captura de esta pantalla y envíamela."
+    description: "⌾ Crédito y Débito | ⌾ Se entregan 100% Lives | ⌾ Con todos sus Datos | ⌾ Cualquier País (pregunta disponibilidad)"
+  - category: SHOP
+    position: 2
+    sku_key: shop_producto_02
+    name: "SHOP 02 - 🔗 Links de CCS Shop"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Links Shop Ccs: | 1. https://00code.fm | 2. https://cczauvr.sale | 3. https://novacc.cx | 4. https://mydb.cc | 5. https://robinshop.su | 6. https://ronaldo-club.to | 7. https://ccartel.cc | 8. https://blackpass.link | 9. https://cerberux-club.to | 10. https://tox3.in | 11. https://centercc.info | 12. https://icard-cc.info | 13. https://stuffcc.info | 14. https://wrabbit.info | 15. https://wstreetcc.top | 16. https://targetcc.info/ | 17. https://ultimate-shop.ru | 18. https://cardingcashout.com | 19. https://darkwebcc.com | 20. https://torbag.pw | 21. https://vortiga-shop.to | 22. https://prozone.cc | 23. https://www.lukicrown.to | 24. https://stashpatrick.pl | 25. https://rosecc.pw | 26. https://voug.ht | 27. https://styxmarket.news | 28. https://realvalid.io | 29. https://bidencash.eu | 30. https://russianmarket.onl | 31. https://castrocvv.cc | 32. https://jerryclub.cc | 33. https://moneycounter.cc | 34. https://authorize.is | 35. https://vclub.su | 36. https://uniccshop.ru"
+    description: "⌾ 36 páginas para comprar tarjetas reales | ⌾ 100% Verificadas | ⌾ Debito/Crédito | ⌾ Bin de cualquier País | ⌾ Precios de las Ccs varian según la página"
+  - category: SHOP
+    position: 3
+    sku_key: shop_producto_03
+    name: "SHOP 03 - Producto 03"
+    price_usd: 20
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Contenido digital | Acceso inmediato"
+    description: "Descripcion del producto 03 | Detalles adicionales"
+  - category: SHOP
+    position: 4
+    sku_key: shop_producto_04
+    name: "SHOP 04 - Producto 04"
+    price_usd: 20
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Contenido digital | Acceso inmediato"
+    description: "Descripcion del producto 04 | Detalles adicionales"
+  - category: SHOP
+    position: 5
+    sku_key: shop_producto_05
+    name: "SHOP 05 - Producto 05"
+    price_usd: 20
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Contenido digital | Acceso inmediato"
+    description: "Descripcion del producto 05 | Detalles adicionales"
+  - category: SHOP
+    position: 6
+    sku_key: shop_producto_06
+    name: "SHOP 06 - Producto 06"
+    price_usd: 20
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Contenido digital | Acceso inmediato"
+    description: "Descripcion del producto 06 | Detalles adicionales"
+  - category: SHOP
+    position: 7
+    sku_key: shop_producto_07
+    name: "SHOP 07 - Producto 07"
+    price_usd: 22
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/shop-07"
+      note: "Acceso web"
+    description: "Descripcion del producto 07 | Detalles adicionales"
+  - category: SHOP
+    position: 8
+    sku_key: shop_producto_08
+    name: "SHOP 08 - Producto 08"
+    price_usd: 22
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/shop-08"
+      note: "Acceso web"
+    description: "Descripcion del producto 08 | Detalles adicionales"
+  - category: SHOP
+    position: 9
+    sku_key: shop_producto_09
+    name: "SHOP 09 - Producto 09"
+    price_usd: 22
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/shop-09"
+      note: "Acceso web"
+    description: "Descripcion del producto 09 | Detalles adicionales"
+  - category: SHOP
+    position: 10
+    sku_key: shop_producto_10
+    name: "SHOP 10 - Producto 10"
+    price_usd: 22
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/shop-10"
+      note: "Acceso web"
+    description: "Descripcion del producto 10 | Detalles adicionales"
+  - category: SHOP
+    position: 11
+    sku_key: shop_producto_11
+    name: "SHOP 11 - Producto 11"
+    price_usd: 22
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/shop-11"
+      note: "Acceso web"
+    description: "Descripcion del producto 11 | Detalles adicionales"
+  - category: SHOP
+    position: 12
+    sku_key: shop_producto_12
+    name: "SHOP 12 - Producto 12"
+    price_usd: 22
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/shop-12"
+      note: "Acceso web"
+    description: "Descripcion del producto 12 | Detalles adicionales"
+  - category: SHOP
+    position: 13
+    sku_key: shop_producto_13
+    name: "SHOP 13 - Producto 13"
+    price_usd: 24
+    is_active: true
+    delivery_type: FILE
+    delivery_payload:
+      telegram_file_id: "PENDING_FILE_ID"
+      filename: "archivo_13.pdf"
+      fallback_url: "https://example.com/fallback/archivo-13"
+    description: "Descripcion del producto 13 | Detalles adicionales"
+  - category: SHOP
+    position: 14
+    sku_key: shop_producto_14
+    name: "SHOP 14 - Producto 14"
+    price_usd: 24
+    is_active: true
+    delivery_type: FILE
+    delivery_payload:
+      telegram_file_id: "PENDING_FILE_ID"
+      filename: "archivo_14.pdf"
+      fallback_url: "https://example.com/fallback/archivo-14"
+    description: "Descripcion del producto 14 | Detalles adicionales"
+  - category: SHOP
+    position: 15
+    sku_key: shop_producto_15
+    name: "SHOP 15 - Producto 15"
+    price_usd: 24
+    is_active: true
+    delivery_type: VIDEO
+    delivery_payload:
+      telegram_file_id: "PENDING_FILE_ID"
+      filename: "video_15.mp4"
+      fallback_url: "https://example.com/fallback/video-15"
+    description: "Descripcion del producto 15 | Detalles adicionales"
+  - category: SHOP
+    position: 16
+    sku_key: shop_producto_16
+    name: "SHOP 16 - Producto 16"
+    price_usd: 24
+    is_active: true
+    delivery_type: IMAGE
+    delivery_payload:
+      telegram_file_id: "PENDING_FILE_ID"
+      filename: "imagen_16.jpg"
+      fallback_url: "https://example.com/fallback/imagen-16"
+    description: "Descripcion del producto 16 | Detalles adicionales"
+  - category: SHOP
+    position: 17
+    sku_key: shop_producto_17
+    name: "SHOP 17 - Producto 17"
+    price_usd: 24
+    is_active: true
+    delivery_type: IMAGE
+    delivery_payload:
+      telegram_file_id: "PENDING_FILE_ID"
+      filename: "imagen_17.jpg"
+      fallback_url: "https://example.com/fallback/imagen-17"
+    description: "Descripcion del producto 17 | Detalles adicionales"
+  - category: SHOP
+    position: 18
+    sku_key: shop_producto_18
+    name: "SHOP 18 - Producto 18"
+    price_usd: 24
+    is_active: true
+    delivery_type: EXPIRING_LINK
+    delivery_payload:
+      url: "https://example.com/entrega/shop-18"
+      note: "Acceso temporal"
+    description: "Descripcion del producto 18 | Detalles adicionales"
+  - category: METODOS
+    position: 1
+    sku_key: metodos_producto_01
+    name: "METODOS 01 - Producto 01"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 01 | Detalles adicionales"
+  - category: METODOS
+    position: 2
+    sku_key: metodos_producto_02
+    name: "METODOS 02 - Producto 02"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 02 | Detalles adicionales"
+  - category: METODOS
+    position: 3
+    sku_key: metodos_producto_03
+    name: "METODOS 03 - Producto 03"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 03 | Detalles adicionales"
+  - category: METODOS
+    position: 4
+    sku_key: metodos_producto_04
+    name: "METODOS 04 - Producto 04"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 04 | Detalles adicionales"
+  - category: METODOS
+    position: 5
+    sku_key: metodos_producto_05
+    name: "METODOS 05 - Producto 05"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 05 | Detalles adicionales"
+  - category: METODOS
+    position: 6
+    sku_key: metodos_producto_06
+    name: "METODOS 06 - Producto 06"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 06 | Detalles adicionales"
+  - category: METODOS
+    position: 7
+    sku_key: metodos_producto_07
+    name: "METODOS 07 - Producto 07"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 07 | Detalles adicionales"
+  - category: METODOS
+    position: 8
+    sku_key: metodos_producto_08
+    name: "METODOS 08 - Producto 08"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 08 | Detalles adicionales"
+  - category: METODOS
+    position: 9
+    sku_key: metodos_producto_09
+    name: "METODOS 09 - Producto 09"
+    price_usd: 15
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Guia paso a paso | Acceso inmediato"
+    description: "Descripcion del metodo 09 | Detalles adicionales"
+  - category: VIP
+    position: 1
+    sku_key: vip_producto_01
+    name: "VIP 01 - Producto 01"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 01 | Detalles adicionales"
+  - category: VIP
+    position: 2
+    sku_key: vip_producto_02
+    name: "VIP 02 - Producto 02"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 02 | Detalles adicionales"
+  - category: VIP
+    position: 3
+    sku_key: vip_producto_03
+    name: "VIP 03 - Producto 03"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 03 | Detalles adicionales"
+  - category: VIP
+    position: 4
+    sku_key: vip_producto_04
+    name: "VIP 04 - Producto 04"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 04 | Detalles adicionales"
+  - category: VIP
+    position: 5
+    sku_key: vip_producto_05
+    name: "VIP 05 - Producto 05"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 05 | Detalles adicionales"
+  - category: VIP
+    position: 6
+    sku_key: vip_producto_06
+    name: "VIP 06 - Producto 06"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 06 | Detalles adicionales"
+  - category: VIP
+    position: 7
+    sku_key: vip_producto_07
+    name: "VIP 07 - Producto 07"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 07 | Detalles adicionales"
+  - category: VIP
+    position: 8
+    sku_key: vip_producto_08
+    name: "VIP 08 - Producto 08"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 08 | Detalles adicionales"
+  - category: VIP
+    position: 9
+    sku_key: vip_producto_09
+    name: "VIP 09 - Producto 09"
+    price_usd: 30
+    is_active: true
+    delivery_type: TEXT
+    delivery_payload:
+      text: "Acceso VIP | Contenido exclusivo"
+    description: "Descripcion del VIP 09 | Detalles adicionales"
+  - category: WEB
+    position: 1
+    sku_key: web_producto_01
+    name: "WEB 01 - Producto 01"
+    price_usd: 18
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-01"
+      note: "Acceso web"
+    description: "Descripcion web 01 | Detalles adicionales"
+  - category: WEB
+    position: 2
+    sku_key: web_producto_02
+    name: "WEB 02 - Producto 02"
+    price_usd: 18
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-02"
+      note: "Acceso web"
+    description: "Descripcion web 02 | Detalles adicionales"
+  - category: WEB
+    position: 3
+    sku_key: web_producto_03
+    name: "WEB 03 - Producto 03"
+    price_usd: 18
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-03"
+      note: "Acceso web"
+    description: "Descripcion web 03 | Detalles adicionales"
+  - category: WEB
+    position: 4
+    sku_key: web_producto_04
+    name: "WEB 04 - Producto 04"
+    price_usd: 18
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-04"
+      note: "Acceso web"
+    description: "Descripcion web 04 | Detalles adicionales"
+  - category: WEB
+    position: 5
+    sku_key: web_producto_05
+    name: "WEB 05 - Producto 05"
+    price_usd: 18
+    is_active: true
+    delivery_type: LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-05"
+      note: "Acceso web"
+    description: "Descripcion web 05 | Detalles adicionales"
+  - category: WEB
+    position: 6
+    sku_key: web_producto_06
+    name: "WEB 06 - Producto 06"
+    price_usd: 18
+    is_active: true
+    delivery_type: EXPIRING_LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-06"
+      note: "Acceso temporal"
+    description: "Descripcion web 06 | Detalles adicionales"
+  - category: WEB
+    position: 7
+    sku_key: web_producto_07
+    name: "WEB 07 - Producto 07"
+    price_usd: 18
+    is_active: true
+    delivery_type: EXPIRING_LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-07"
+      note: "Acceso temporal"
+    description: "Descripcion web 07 | Detalles adicionales"
+  - category: WEB
+    position: 8
+    sku_key: web_producto_08
+    name: "WEB 08 - Producto 08"
+    price_usd: 18
+    is_active: true
+    delivery_type: EXPIRING_LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-08"
+      note: "Acceso temporal"
+    description: "Descripcion web 08 | Detalles adicionales"
+  - category: WEB
+    position: 9
+    sku_key: web_producto_09
+    name: "WEB 09 - Producto 09"
+    price_usd: 18
+    is_active: true
+    delivery_type: EXPIRING_LINK
+    delivery_payload:
+      url: "https://example.com/entrega/web-09"
+      note: "Acceso temporal"
+    description: "Descripcion web 09 | Detalles adicionales"
